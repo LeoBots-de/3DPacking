@@ -1,3 +1,4 @@
+
 from flask import Flask, request, jsonify
 from packaging import Organizer, Article, Package, Space
 
@@ -26,6 +27,8 @@ def solpacking(req):
 
 @app.route('/')
 def hello_world():
+    solver = Organizer()
+    solver.solve()
     return 'Hello World!'
 
 
