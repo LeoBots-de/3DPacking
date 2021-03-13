@@ -1,6 +1,3 @@
-from packaging.position import *
-
-
 class Space:
     dims: []
 
@@ -25,13 +22,3 @@ class Space:
         for d in range(dim):
             res *= r[d]
         return res
-
-
-class FreeSpace(Space):
-    pos: Position
-
-    def fill(self, s: Space):
-
-
-        return freespace,position
-
