@@ -1,8 +1,11 @@
+from time import time
+
 from .constants import Axis
 from .auxiliary_methods import intersect, set_to_decimal
 from packaging.package import *
 from packaging.article import *
 from copy import deepcopy
+from random import random
 
 START_POSITION = [0, 0, 0]
 
@@ -16,29 +19,22 @@ class Organizer:
     def solve(self):
 
         self.add_bin(Package(1111, 11.5, 6.125, 0.25, 3))
-        self.add_bin(Package(2, 15.0, 12.0, 0.75, 5))
+        self.add_bin(Package(1112, 15.0, 12.0, 0.75, 5))
         self.add_bin(Package(1113, 8.625, 5.375, 1.625, 3))
         self.add_bin(Package(1114, 11.0, 8.5, 5.5, 4))
         self.add_bin(Package(1115, 13.625, 11.875, 3.375, 5))
-        self.add_bin(Package(6, 12.0, 12.0, 5.5, 5))
-        self.add_bin(Package(7, 23.6875, 11.75, 3.0, 4))
-
-        self.add_item(Article(1, 3.9370, 1.9685, 1.9685))
-        self.add_item(Article(2, 3.9370, 1.9685, 1.9685))
-        self.add_item(Article(3, 3.9370, 1.9685, 1.9685))
-        self.add_item(Article(4, 7.8740, 3.9370, 1.9685))
-        self.add_item(Article(5, 7.8740, 3.9370, 1.9685))
-        self.add_item(Article(6, 7.8740, 3.9370, 1.9685))
-        self.add_item(Article(7, 7.8740, 3.9370, 1.9685))
-        self.add_item(Article(8, 7.8740, 3.9370, 1.9685))
-        self.add_item(Article(9, 7.8740, 3.9370, 1.9685))
-
-        self.add_bin(Package(1111, 10, 20, 15, 10))
-        self.add_bin(Package(1112, 10, 10, 10, 5))
+        self.add_bin(Package(1116, 12.0, 12.0, 5.5, 5))
+        self.add_bin(Package(1117, 23.6875, 11.75, 3.0, 4))
+        self.add_bin(Package(1118, 10, 20, 15, 10))
+        self.add_bin(Package(1119, 10, 10, 10, 5))
 
 
-
+        for i in range(4000):
+            self.add_item(Article(i, random()*12, random()*12, random()*5))
+        print("for END")
+        start = time()
         self.pack()
+        dt = time()-start
 
         for b in self.packages:
             print(":::::::::::", b.string())
@@ -54,6 +50,7 @@ class Organizer:
             print("***************************************************")
             print("***************************************************")
 
+        print(dt)
         # print("SOLLTE LEER SEIN: ------------------------->")
         # for b in self.bins:
         #     print(":::::::::::", b.string())
