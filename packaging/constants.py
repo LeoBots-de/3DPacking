@@ -1,6 +1,6 @@
 class Axis:
     WIDTH = 0
-    HEIGHT = 1
-    DEPTH = 2
+    DEPTH = 1
+    HEIGHT = 2
 
-    ALL = [WIDTH, HEIGHT, DEPTH]
+    ALL = [WIDTH, DEPTH, HEIGHT]

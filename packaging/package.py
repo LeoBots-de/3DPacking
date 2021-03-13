@@ -8,7 +8,7 @@ class Package:
     height: float
     depth: float
     cost: float
-    items =[]
+    items = []
     unfitted_items = []
 
     def __init__(self, id:int, x:float, y:float, z:float, cost:float):
@@ -17,11 +17,13 @@ class Package:
         self.depth = y
         self.height = z
         self.cost = cost
+        self.items = []
+        self.unfitted_items = []
 
 
     def string(self):
-        return "(%sx%sx%s) vol(%s) bbb" % (
-             self.width, self.height, self.depth, self.get_volume()
+        return "%s(%sx%sx%s) vol(%s) bbb" % (
+             self.id, self.width, self.depth, self.height, self.get_volume()
         )
 
     def get_volume(self):
@@ -52,3 +54,6 @@ class Package:
             item.position = valid_item_position
 
         return fit
+
+    def copy(self):
+        return Package(self.id, self.width, self.depth, self.height, self.cost)

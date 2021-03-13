@@ -16,6 +16,7 @@ class Article:
         self.width = x
         self.depth = y
         self.height = z
+        self.position = []
 
     def string(self):
         return "%s(%sx%sx%s) pos(%s) vol(%s)" % (
@@ -28,3 +29,6 @@ class Article:
 
     def get_dimension(self):
         return [self.width, self.depth, self.height]
+
+    def copy(self):
+        return Article(self.id, self.width, self.depth, self.height)
