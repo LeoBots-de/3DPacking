@@ -1,9 +1,3 @@
-from packaging.space import *
-
-from .constants import Axis
-from .auxiliary_methods import intersect, set_to_decimal
-
-
 class Article:
     id: int
     width: float

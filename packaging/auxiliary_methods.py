@@ -16,11 +16,6 @@ def rect_intersect(item1, item2, x, y):
 
     return ix < (d1[x]+d2[x])/2 and iy < (d1[y]+d2[y])/2
 
-   #if (cx1 < item2.position[x] or cx2 < item1.position[x] or cy1 < item2.position[y] or cy2 < item1.position[y]):
-   #    return False
-   #else:
-   #    return True
-
 
 def intersect(item1, item2):
     return (

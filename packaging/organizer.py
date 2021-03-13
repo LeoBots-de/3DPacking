@@ -1,11 +1,7 @@
 from time import time
-
-from .constants import Axis
-from .auxiliary_methods import intersect, set_to_decimal
 from packaging.package import *
 from packaging.article import *
-from copy import deepcopy
-from random import random
+from random import random, seed
 
 START_POSITION = [0, 0, 0]
 
@@ -16,7 +12,7 @@ class Organizer:
     bins = []
     costs: float
 
-    def solve(self):
+    def example(self):
 
         self.add_bin(Package(1111, 11.5, 6.125, 0.25, 3))
         self.add_bin(Package(1112, 15.0, 12.0, 0.75, 5))
@@ -28,43 +24,25 @@ class Organizer:
         self.add_bin(Package(1118, 10, 20, 15, 10))
         self.add_bin(Package(1119, 10, 10, 10, 5))
 
+        seed(10)
 
-        for i in range(4000):
-            self.add_item(Article(i, random()*12, random()*12, random()*5))
+        for i in range(20):
+            self.add_item(Article(i, random() * 12, random() * 12, random() * 5))
         print("for END")
         start = time()
         self.pack()
-        dt = time()-start
+        dt = time() - start
 
         for b in self.packages:
-            print(":::::::::::", b.string())
+            print("============", b.string())
 
-            print("FITTED ITEMS:")
+            print("ITEMS:")
             for item in b.items:
                 print("====> ", item.string())
 
-           # print("UNFITTED ITEMS:")
-           # for item in b.unfitted_items:
-           #     print("====> ", item.string())
-
-            print("***************************************************")
-            print("***************************************************")
+            print("#########################")
 
         print(dt)
-        # print("SOLLTE LEER SEIN: ------------------------->")
-        # for b in self.bins:
-        #     print(":::::::::::", b.string())
-#
-        #     print("FITTED ITEMS:")
-        #     for item in b.items:
-        #         print("====> ", item.string())
-#
-        #     print("UNFITTED ITEMS:")
-        #     for item in b.unfitted_items:
-        #         print("====> ", item.string())
-#
-        #     print("***************************************************")
-        #     print("***************************************************")
 
     def add_bin(self, bin):
         return self.bins.append(bin)
@@ -77,9 +55,6 @@ class Organizer:
 
         if not bin.items:
             response = bin.put_item(item, START_POSITION)
-
-            if not response:
-                bin.unfitted_items.append(item)
 
             return response
 
@@ -114,9 +89,6 @@ class Organizer:
             if fitted:
                 break
 
-        if not fitted:
-            bin.unfitted_items.append(item)
-
         return fitted
 
     # items bereits sortiert
@@ -126,7 +98,6 @@ class Organizer:
 
         for item in items:
             if (self.pack_to_bin(bin, item.copy())):
-               # items.remove(item)
                 fit = True
             else:
                 rest.append(item)
@@ -145,8 +116,8 @@ class Organizer:
             costs += bin.cost
         else:
             packs, costs = self.test(bins, items, pointer + 1)
-            if(fit):
-                if(costs>bin.cost or not packs):
+            if (fit):
+                if (costs > bin.cost or not packs):
                     costs = bin.cost
                     packs = [bin]
         return packs, costs
