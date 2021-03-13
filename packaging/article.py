@@ -4,6 +4,7 @@ class Article:
     height: float
     depth: float
     position = []
+    pid: int
 
     def __init__(self, id: int, x: float, y: float, z: float):
         self.id = id
@@ -11,6 +12,7 @@ class Article:
         self.depth = y
         self.height = z
         self.position = []
+        self.pid = -1
 
     def string(self):
         return "%s(%sx%sx%s) pos(%s) vol(%s)" % (

@@ -1,4 +1,6 @@
 from time import time
+
+from packaging.constants import Axis
 from packaging.package import *
 from packaging.article import *
 from random import random, seed
@@ -125,10 +127,26 @@ class Organizer:
     def pack(self, bigger_first=True, distribute_items=True):
 
         self.bins.sort(
-            key=lambda bin: bin.get_volume() / bin.cost, reverse=bigger_first
+            key=lambda bin: (bin.get_volume() / bin.cost), reverse=bigger_first
         )
         self.articles.sort(
             key=lambda item: item.get_volume(), reverse=bigger_first
         )
 
         self.packages, self.costs = self.test(self.bins, self.articles, 0)
+
+        usedpack = []
+        usedarticle = []
+
+        for p in self.packages:
+            usedpack.append(p.id)
+            usedarticle.extend(p.items)
+
+        usedarticle.sort(
+            key=lambda item: item.id
+        )
+
+        anothernewlist = []
+        for a in usedarticle:
+            anothernewlist.append([a.pid, a.position[0], a.position[1], a.position[2]])
+        return usedpack, anothernewlist

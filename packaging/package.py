@@ -44,6 +44,7 @@ class Package:
                 break
 
         if fit:
+            item.pid = self.id
             self.items.append(item)
         if not fit:
             item.position = valid_item_position
