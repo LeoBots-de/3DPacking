@@ -1,5 +1,5 @@
 import json
-
+import sys
 from flask import Flask, request, jsonify
 from packaging import Organizer, Article, Package
 
@@ -31,25 +31,14 @@ def solpacking(req):
     organizer.articles = articlelist
     packages, items = organizer.pack()
 
-    #json.dumps({'4': 5, '6': 7}
-    for b in organizer.packages:
-        print("============", b.string())
-
-        print("ITEMS:")
-        for item in b.items:
-            print("====> ", item.string())
-
-        print("#########################")
     res = json.dumps({"used_packages": packages, "article_positions": items})
-    print(res)
+
     return res
 
 
 @app.route('/')
 def hello_world():
-    solver = Organizer()
-    solver.solve()
-    return 'Hello World!'
+    return 'Es funzt!'
 
 
 @app.route('/packaging', methods=['POST'])
@@ -59,4 +48,11 @@ def packaging():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+
+    if(len(sys.argv) == 2):
+        with open(sys.argv[1]) as json_file:
+            data = json.load(json_file)
+        answer = solpacking(data)
+        print(answer)
+    else:
+        app.run(host='0.0.0.0')
