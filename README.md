@@ -1,30 +1,25 @@
 # 3DPacking
-This project was created in the Relaxdays Code Challenge Vol. 1. See https://sites.google.com/relaxdays.de/hackathon-relaxdays/startseite for more information. My participant ID in the challenge was: CC-VOL1-14, CC-VOL1-16, CC-VOL1-85
+This project was created in the Relaxdays Code Challenge Vol. 1. See https://sites.google.com/relaxdays.de/hackathon-relaxdays/startseite for more information.
+Our participant IDs in the challenge were: CC-VOL1-14, CC-VOL1-16, CC-VOL1-85
 
 
 
-#Idee
-bins volumen/preis - max zu min
 
-artikel nach volumen zu sort - max zu min
-
-möglichst oft den max. bin mit Artikeln füllen
-
-letzer Container wird in preis niedrigeren gepackt
-
-
-
-TEST: 
-wenn in den besten alles rein passt, dann nächst schlechteren testen
-
-wenn dieser zu klein, dann mit dem überschuss mit nächst schlechteren nochmal TEST
-
-vergleiche aktuellen preis mit erneuten test preis, wenn größer dann
 
 ##Docker
+Please use the following commands to execute the project 
+and enter the relative path to the root directory as the path.
 ```commandline
-docker build -t 3dpacking . && docker run -d -p 5000:5000 3dpacking 
+docker build -t 3dp .   
+
+docker run -d -p 5000:5000 3dp python /3DPacking/app.py "testcase.json"
 ```
+
+##Alternative: API
+Alternatively, you can also run the programme via an API. 
+Please do not pass a JSON file as an argument. 
+You will receive the answer as JSON via http://127.0.0.1:5000/packaging via POST request.
+
 
 ## JSON Input
 ```json
